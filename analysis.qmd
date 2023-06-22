@@ -4,6 +4,7 @@ author: "Daniel Cho"
 format: html
 execute: 
   echo: false
+
 ---
 
 
@@ -14,7 +15,7 @@ library(tidyverse)
 
 ```{r}
 x <- read_csv("data/i_names.csv", show_col_types = FALSE)
-x
+
 ```
 
 ```{r}
