@@ -1,6 +1,6 @@
 ---
 title: "Babynames"
-author: "David Kane"
+author: "Daniel Cho"
 format: html
 execute: 
   echo: false
@@ -15,6 +15,22 @@ library(tidyverse)
 ```{r}
 x <- read_csv("data/i_names.csv", show_col_types = FALSE)
 x
+```
+
+```{r}
+x |>
+  filter(year >= 1900) |>
+  summarize(.by = c(year,sex), sum_names = sum(n), sum_prop = sum(prop)) |>
+  ggplot(aes(x = year, y = sum_prop, color = sex)) +
+  geom_line() + 
+  geom_area(aes(fill = sex)) +
+  scale_x_continuous(breaks = seq(1900, 2016, 4)) +
+  theme(axis.text.x = element_text(angle = 90)) + 
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(title = "US Babies born with names ending in -i",
+       subtitle = "Names ending in -i have steadily increased, and more percent of girl names \nend in -i than boys",
+       y = "Percent of Babies", x = "Year")
+
 ```
 
 
